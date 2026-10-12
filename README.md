@@ -1,27 +1,27 @@
 # Code-Analyzer
 
 Markdown
-# ⚡ AI Code Auditor Pro (Static Analysis Studio)
+# AI Code Auditor Pro (Static Analysis Studio)
 
 > An enterprise-grade, lightning-fast AI code auditing platform inspired by modern developer tool aesthetics (Vercel, Linear, Supabase). It automatically inspects source code for critical logic bugs, security vulnerabilities, and performance bottlenecks, offering automated refactored fixes with multi-language explanations.
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
-- **🚀 Advanced AI Engine:** Powered by Groq Cloud API (`llama-3.3-70b-versatile` / `llama-3.1-8b-instant`) using direct, high-stability HTTP request pipelines.
-- **🌐 Multi-Language Explanations:** Get code audits and bug breakdowns explained in your preferred language—with dedicated first-class support for **Roman Urdu / Hindi**, **Hindi**, and **English**.
-- **🛡️ Comprehensive Structured Auditing:** Automatically parses code into strict JSON metrics:
+- ** Advanced AI Engine:** Powered by Groq Cloud API (`llama-3.3-70b-versatile` / `llama-3.1-8b-instant`) using direct, high-stability HTTP request pipelines.
+- ** Multi-Language Explanations:** Get code audits and bug breakdowns explained in your preferred language—with dedicated first-class support for **Roman Urdu / Hindi**, **Hindi**, and **English**.
+- ** Comprehensive Structured Auditing:** Automatically parses code into strict JSON metrics:
   - Executive Summary
   - Critical Bugs & Logic Errors
   - Security Vulnerabilities (e.g., SQL Injection, Hardcoded Secrets)
   - Performance Bottlenecks & Memory Leaks
   - Fully Refactored, Production-Ready Code Block with One-Click Copy.
-- **🎨 Sleek Dark-Mode UI:** Built with React, Vite, and Tailwind CSS featuring glassmorphism, ambient radial glows, and Monaco Editor integration.
+- ** Sleek Dark-Mode UI:** Built with React, Vite, and Tailwind CSS featuring glassmorphism, ambient radial glows, and Monaco Editor integration.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend:** React, Vite, Tailwind CSS, Monaco Editor, Lucide Icons.
 - **Backend:** Python, FastAPI, Uvicorn, Requests, Python-Dotenv.
@@ -41,7 +41,7 @@ code_analyzer/
 │   ├── groq_service.py # Groq API integration & prompt engine
 │   └── requirements.txt# Python dependencies
 └── README.md
-🚀 Getting Started Locally
+ Getting Started Locally
 Prerequisites
 Node.js & npm installed
 
@@ -79,7 +79,7 @@ npm install
 npm run dev
 Open your browser at http://localhost:5173 to use the application!
 
-☁️ Production Deployment Guide (Monorepo Setup)
+ Production Deployment Guide (Monorepo Setup)
 This project is structured as a monorepo and can be independently deployed using path-based triggers:
 
 Frontend (Vercel):
@@ -100,5 +100,5 @@ Start Command: uvicorn main:app --host 0.0.0.0 --port $PORT
 
 Add Environment Variable: GROQ_API_KEY.
 
-👤 Author & Credits
-Crafted with ⚡ by Code.with.Sarim
+ Author & Credits
+Crafted with  by Code.with.Sarim
