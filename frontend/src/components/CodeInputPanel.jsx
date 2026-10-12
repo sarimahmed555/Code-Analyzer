@@ -1,6 +1,6 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Editor from "@monaco-editor/react";
-import { IconFileCheck, IconRocket, IconSpinner, IconUpload } from "./icons";
+import { IconFileCheck, IconGlobe, IconRocket, IconSpinner, IconUpload } from "./icons";
 
 const LANGUAGE_OPTIONS = [
   { value: "javascript", label: "JavaScript" },
@@ -12,6 +12,27 @@ const LANGUAGE_OPTIONS = [
   { value: "java", label: "Java" },
   { value: "rust", label: "Rust" },
   { value: "go", label: "Go" },
+];
+
+const PRIMARY_EXPLAIN_LANGUAGES = [
+  { value: "ur-hi", label: "Roman Urdu / Hindi" },
+  { value: "hi", label: "Hindi" },
+  { value: "en", label: "English" },
+];
+
+const GLOBAL_EXPLAIN_LANGUAGES = [
+  { value: "ar", label: "Arabic" },
+  { value: "bn", label: "Bengali" },
+  { value: "zh", label: "Chinese (Simplified)" },
+  { value: "fr", label: "French" },
+  { value: "de", label: "German" },
+  { value: "it", label: "Italian" },
+  { value: "ja", label: "Japanese" },
+  { value: "ko", label: "Korean" },
+  { value: "pt", label: "Portuguese" },
+  { value: "es", label: "Spanish" },
+  { value: "tr", label: "Turkish" },
+  { value: "ur", label: "Urdu" },
 ];
 
 const EXT_TO_LANG = {
@@ -44,6 +65,8 @@ export default function CodeInputPanel({
   setCode,
   language,
   setLanguage,
+  explainLanguage,
+  setExplainLanguage,
   fileName,
   onFileSelect,
   onAnalyze,
@@ -66,8 +89,8 @@ export default function CodeInputPanel({
   };
 
   return (
-    <section className="flex h-[560px] flex-col overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 shadow-2xl shadow-purple-500/5 backdrop-blur-xl lg:h-[640px]">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 bg-slate-900/40 px-4 py-3">
+    <section className="flex h-[560px] flex-col rounded-2xl border border-slate-800/80 bg-slate-900/50 shadow-2xl shadow-purple-500/5 backdrop-blur-xl lg:h-[640px]">
+      <div className="relative z-20 flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 bg-slate-900/40 px-4 py-3 rounded-t-2xl">
         <div className="flex items-center gap-2.5">
           <span className="relative flex h-2.5 w-2.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-70" />
@@ -106,11 +129,36 @@ export default function CodeInputPanel({
             className="cursor-pointer rounded-lg border border-slate-700/80 bg-slate-800/60 px-2.5 py-1.5 text-[11px] font-semibold text-slate-200 focus:border-indigo-500/60 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
           >
             {LANGUAGE_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
+              <option key={opt.value} value={opt.value} className="bg-slate-900 text-slate-200">
                 {opt.label}
               </option>
             ))}
           </select>
+          <span className="hidden h-5 w-px bg-slate-700/70 sm:block" />
+          <div className="flex items-center gap-1.5 rounded-lg border border-slate-700/80 bg-slate-800/60 px-2 py-1.5">
+            <IconGlobe className="h-3.5 w-3.5 shrink-0 text-violet-400" />
+            <select
+              value={explainLanguage}
+              onChange={(e) => setExplainLanguage(e.target.value)}
+              aria-label="Analysis response language"
+              className="max-w-[150px] cursor-pointer appearance-none bg-transparent text-[11px] font-semibold text-slate-200 focus:outline-none"
+            >
+              <optgroup label="Primary languages" className="bg-slate-900 text-slate-400">
+                {PRIMARY_EXPLAIN_LANGUAGES.map((opt) => (
+                  <option key={opt.value} value={opt.value} className="bg-slate-900 text-slate-200">
+                    {opt.label}
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup label="Global languages" className="bg-slate-900 text-slate-400">
+                {GLOBAL_EXPLAIN_LANGUAGES.map((opt) => (
+                  <option key={opt.value} value={opt.value} className="bg-slate-900 text-slate-200">
+                    {opt.label}
+                  </option>
+                ))}
+              </optgroup>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -132,7 +180,7 @@ export default function CodeInputPanel({
         />
       </div>
 
-      <div className="flex items-center justify-between gap-3 bg-slate-900/40 px-4 py-3">
+      <div className="flex items-center justify-between gap-3 bg-slate-900/40 px-4 py-3 rounded-b-2xl">
         <p className="hidden text-[11px] font-medium text-slate-500 sm:block">
           {code.length.toLocaleString()} chars
           <span className="mx-1.5 text-slate-700">•</span>

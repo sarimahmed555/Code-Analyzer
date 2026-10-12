@@ -25,6 +25,7 @@ async def analyze_code(
     code: str = Form(None),
     file: UploadFile = File(None),
     language: str = Form("javascript"),
+    explain_language: str = Form("en"),
 ):
     code_text = ""
 
@@ -37,7 +38,11 @@ async def analyze_code(
         raise HTTPException(status_code=400, detail="Either code text or a file must be provided.")
 
     try:
-        report = analyze_code_with_groq(code_content=code_text, language=language)
+        report = analyze_code_with_groq(
+            code_content=code_text,
+            language=language,
+            explain_language=explain_language,
+        )
     except GroqAnalysisError as e:
         raise HTTPException(status_code=502, detail=f"AI service error: {e}")
     except Exception as e:

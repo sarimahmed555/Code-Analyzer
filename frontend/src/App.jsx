@@ -13,6 +13,7 @@ function add(a, b) {
 export default function App() {
   const [code, setCode] = useState(DEFAULT_CODE);
   const [language, setLanguage] = useState("javascript");
+  const [explainLanguage, setExplainLanguage] = useState("en");
   const [fileName, setFileName] = useState(null);
   const [loading, setLoading] = useState(false);
   const [report, setReport] = useState(null);
@@ -34,6 +35,7 @@ export default function App() {
       const formData = new FormData();
       formData.append("code", code);
       formData.append("language", language);
+      formData.append("explain_language", explainLanguage);
 
       setScanId((id) => id + 1);
 
@@ -77,7 +79,7 @@ export default function App() {
               v2.0 Production
             </span>
             <p className="whitespace-nowrap text-[11px] text-slate-500">
-              Crafted with ⚡ by{" "}
+              Crafted by{" "}
               <span className="font-semibold text-slate-300">Code.with.Sarim</span>
             </p>
           </div>
@@ -105,6 +107,8 @@ export default function App() {
             setCode={setCode}
             language={language}
             setLanguage={setLanguage}
+            explainLanguage={explainLanguage}
+            setExplainLanguage={setExplainLanguage}
             fileName={fileName}
             onFileSelect={handleFileSelect}
             onAnalyze={handleAnalyze}
